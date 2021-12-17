@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.virtualeduc.registrousuario.models.Usuario;
+
 @Controller
 @RequestMapping("/app")
 public class UsuarioController {
@@ -20,11 +22,12 @@ public class UsuarioController {
 	@GetMapping("/nuevousuario")
 	public String nuevousuario(Model model) {
 		
+		Usuario usuario=new Usuario();
 		
-		
+		model.addAttribute("direccionbase",direccionbase);
+		model.addAttribute("direccionregistrousuario",direccionregistrousuario);
+		model.addAttribute("usuario",usuario);
 		return "usuarios/crearusuario";
-		
-		
 		
 	}
 

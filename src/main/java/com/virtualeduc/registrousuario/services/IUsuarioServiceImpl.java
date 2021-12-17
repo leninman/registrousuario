@@ -51,6 +51,7 @@ public class IUsuarioServiceImpl implements IUsuarioService {
 					persona.setSegundoNombre(alumno.getSegNombAl());
 					persona.setPrimerApellido(alumno.getPrimApellAl());
 					persona.setSegundoApellido(alumno.getSegApellAl());
+					persona.setCorreo(alumno.getEmailAl());
 					
 				}
 
@@ -67,6 +68,7 @@ public class IUsuarioServiceImpl implements IUsuarioService {
 					persona.setSegundoNombre(profesor.getSegNombPrf());
 					persona.setPrimerApellido(profesor.getPrimApellPrf());
 					persona.setSegundoApellido(profesor.getSegApellPrf());
+					persona.setCorreo(profesor.getEmailPrf());
 					
 				}
 
@@ -83,6 +85,7 @@ public class IUsuarioServiceImpl implements IUsuarioService {
 					persona.setSegundoNombre(representante.getSegNombRpr());
 					persona.setPrimerApellido(representante.getPrimApellRpr());
 					persona.setSegundoApellido(representante.getSegApellRpr());
+					persona.setCorreo(representante.getEmailRpr());
 					
 				}
 

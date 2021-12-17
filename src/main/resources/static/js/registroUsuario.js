@@ -1,29 +1,37 @@
-let direccionregistrousuario;
+var direccionregistrousuario;
 var token;
 var tipodocumento;
 var numerocedula;
 var tipousuario;
+var primernombre;
+var segundonombre;
+var primerapellido;
+var segundoapellido;
+var usuario;
+
 
 
 $(document).ready(function () {
-	 token = $("meta[name='_csrf']").attr("content");
-	 //direccionbase=$("#direccionbase").val();
-	 direccionbase="http://localhost:8090/app";
-     tipodocumento=$("#tipodocumento").val();
-     numerocedula=$("#numerocedula").val();
-     tipousuario=$("#tipousuario").val();
-	
-	
+  token = $("meta[name='_csrf']").attr("content");
+  direccionbase = $("#direccionbase").val();
+  direccionregistrousuario = $("#direccionregistrousuario").val();
+  tipodocumento = $("#tipodocumento").val();
+  numerocedula = $("#numerocedula").val();
+  tipousuario = $("#tipousuario").val();
+
+
 });
 
 
 
+
+
 $("#btnBuscarPersona").click(function () {
-  	
-  url=direccionbase+"/consultarpersona";
-  tipodocumento=$("#tipodocumento").val();
-  numerocedula=$("#numerocedula").val();
-  tipousuario=$("#tipousuario").val();	
+
+  url = direccionregistrousuario + "/consultarpersona";
+  tipodocumento = $("#tipodocumento").val();
+  numerocedula = $("#numerocedula").val();
+  tipousuario = $("#tipousuario").val();
 
   $.ajax({
       data: {
@@ -32,22 +40,50 @@ $("#btnBuscarPersona").click(function () {
         tipousuario: tipousuario,
 
       },
-      url:url,
- 	  headers: {"X-CSRF-TOKEN": token}, //send CSRF token in header
+      url: url,
+      headers: {
+        "X-CSRF-TOKEN": token
+      }, //send CSRF token in header
       dataType: "json", //tipo de datos retornados
       type: "GET",
-    })
-    .done(function (data) {
-    
-      console.log(data);
+      success: function (response) {
+       if(response["tipoDocumento"]!=null && response["numeroDocumento"]!=null){
+          $("#containerusuario").css('display', 'block');
+          $("#containerbotones").css('display', 'block');
+          $("#regForm").css('height', '650px');
+          primernombre = response["primerNombre"];
+          segundonombre = response["segundoNombre"];
+          primerapellido = response["primerApellido"];
+          segundoapellido = response["segundoApellido"];
+          $("#nombreapellido").val(`${primernombre}` + ' ' + `${segundonombre}` + ' ' +
+            `${primerapellido}` + ' ' + `${segundoapellido}`);
+          formarUsuario();
+          $("#usuario").val(`${usuario}`);
+          $("#containerusuario").css('display', 'block');
+		  $("#cedula").val(response["tipoDocumento"] + response["numeroDocumento"]);	
+      
+       }else{
+        alert("La persona no se encuentra registrada o el tipo de usuario seleccionado no es correcto");
+       }
+       
+      },
+      
 
-      //$("#primNombRpr1").val(data["primNombRpr"]);
-    
-    })
-    .fail(function (data) {
-      alert("La persona no se encuentra registrada");
+
     });
+   /* .fail(function (data) {
+      alert("La persona no se encuentra registrada");
+    });*/
 });
+
+function formarUsuario() {
+  var primerCaracterNombre = `${primernombre}`.substring(0, 1);
+
+  var user = `${primerCaracterNombre}` + `${primerapellido}`;
+
+  usuario = `${user}`.toLowerCase();
+
+}
 
 
 

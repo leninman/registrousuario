@@ -1,91 +1,114 @@
-
-body{
-background-image: url("/images/modern-education-system-830x555.jpg");
+body {
+	background-image: url("/images/modern-education-system-830x555.jpg");
 }
 
 #btnBuscarPersona {
-  border-radius: 100px;
-  border: 1px solid #b5b5b5;
-  background-color: #2441e6;
-  font-style: normal;
-  color: white;
-  width: 120px;
-  margin: 0 auto;
+	border-radius: 100px;
+	border: 1px solid #b5b5b5;
+	background-color: #2441e6;
+	font-style: normal;
+	color: white;
+	width: 120px;
+	margin: 0 auto;
 }
 
 
- 
+#registrarusuario {
+	border-radius: 100px;
+	border: 1px solid #b5b5b5;
+	background-color: #2441e6;
+	font-style: normal;
+	color: white;
+	width: 150px;
+	margin: 0 auto;
+}
+
 #regForm {
-  height: 500px;
-  width: 600px;
-  border: 0;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+	height: 200px;
+	width: 600px;
+	border: 0;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-
-
-
-#tipodocumento{
-  border-radius: 100px;
-  border: 1px solid #b5b5b5;
-  width: 50px;
-  text-align: center;
+#nombreapellido{
+	text-transform:uppercase;
 }
 
-#numerocedula{
-  border-radius: 100px;
-  border: 1px solid #b5b5b5;
-  width: 100px;
-  text-align: center;
+#tipodocumento {
+	border-radius: 100px;
+	border: 1px solid #b5b5b5;
+	width: 50px;
+	text-align: center;
 }
 
-#tipousuario{
-  border-radius: 100px;
-  border: 1px solid #b5b5b5;
-  width: 150px;
-  text-align: center;
+#numerocedula {
+	border-radius: 100px;
+	border: 1px solid #b5b5b5;
+	width: 100px;
+	text-align: center;
 }
 
-#nombreapellido,#usuario,#clave,#confirmarclave{
-  border-radius: 100px;
-  border: 1px solid #b5b5b5;
-  width: 415px;
-  text-align: center;
+#tipousuario {
+	border-radius: 100px;
+	border: 1px solid #b5b5b5;
+	width: 150px;
+	text-align: center;
 }
 
+#nombreapellido, #usuario, #clave, #confirmarclave {
+	border-radius: 100px;
+	border: 1px solid #b5b5b5;
+	width: 415px;
+	text-align: center;
+}
 
-#containerusuario{
+#containerusuario, #containerbotones{
 	display:none;
+	
 }
-
 #tablenuevousuario {
-	border:none;
+	border: none;
 }
-
 
 #tablenuevousuario th {
-  font-size: medium;
-  border:none;
-  font-style: normal;
-  width: 400px;
+	font-size: medium;
+	border: none;
+	font-style: normal;
+	width: 400px;
 }
 
-
-/*#btnBuscarUsuario{
-	height:30px;
-	 vertical-align: middle;
-}*/
 
 #tablenuevousuario>tbody>tr>td {
-  vertical-align: middle;
-  font-size: medium;
-  text-transform:uppercase;
-  width: 400px;
+	vertical-align: middle;
+	font-size: medium;
+	text-transform: uppercase;
+	width: 400px;
 }
 
-#rowtablenuevousuario {
-  width: 100%;
-  align-items: center;
+#btnSalir{
+	height: 40px;
+}
+
+.grid-container0 {
+	display: grid;
+	grid-template-columns:max-content auto;	
+	grid-column-gap: 350px;
+	
+}
+
+.grid-container1 {
+	display: grid;
+	grid-template-columns: auto auto auto;	
+}
+
+.grid-container2 {
+	display: grid;
+	grid-template-columns: auto;	
+}
+
+.grid-container3 {
+	display: grid;
+	grid-template-columns: auto auto auto;	
 }
 
 

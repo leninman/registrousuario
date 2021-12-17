@@ -1,7 +1,7 @@
 package com.virtualeduc.registrousuario.models;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -44,7 +44,6 @@ public class Usuario implements Serializable {
 	
 	@Column(length = 100)
 	private String clave2;
-	
 	
 	
 	@Column(length = 100)

@@ -22,98 +22,105 @@
 <body>
 	<div class="container p-3 my-3">
 		<div class="card mx-auto" id="regForm">
-			<div class="card-header">Registro de Usuario</div>
+			<div class="card-header">
+				<div class="grid-container0">
+					<div class="grid-item">
+						<h5 id="exampleModalLabel">Registro de usuario</h5>
+						 <input type="hidden" id="direccionbase" name="direccionbase" th:value="${direccionbase}" /> 
+						<input type="hidden" id="direccionregistrousuario" name="direccionregistrousuario"
+							th:value="${direccionregistrousuario}" />
+					</div>
+					
+					<div class="grid-item">
+						<a type="button" data-toggle="tooltip"
+							title="Salir" class="btn btn-danger" id="btnSalir" 
+							th:href="@{${direccionbase}+'/login'}">
+							<i class="bi bi-x"></i><span class="sr-only">(current)</span></a>
 
+						<!-- <button type="button" class="close" aria-label="Close" onclick="closeForm()">
+							<span aria-hidden="true">&times;</span>
+						</button>-->
+					</div>
+
+
+
+
+				</div>
+			</div>
 			<div class="card-body">
 				<div class="container">
-					<form>
+					<form th:action="@{/app/guardarusuario}" th:object="${usuario}" method="post" 
+					id="formRegistroUsuario" name="formRegistroUsuario">
 						<input type="hidden" id="direccionbase" name="direccionbase"
-							th:value="${direccionbase}" /> 
-						<input type="hidden"
+							th:value="${direccionbase}" /> <input type="hidden"
 							id="direccionregistrousuario" name="direccionregistrousuario"
 							th:value="${direccionregistrousuario}" />
-						<div class="row" id="rowtablenuevousuario">
-							<table id="tablenuevousuario">
-								<thead>
-									<tr>
-										<th>Cédula</th>
-										<th>Tipo de usuario</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><select id="tipodocumento" name="tipodocumento">
-												<option value="" selected></option>
-												<option value="V">V</option>
-												<option value="E">E</option>
-												<option value="P">P</option>
-										</select> <input type="text" id="numerocedula" name="numerocedula" />
-										</td>
-
-										<td><select id="tipousuario" name="tipousuario">
-												<option value="" selected></option>
-												<option value="Alumno">Alumno</option>
-												<option value="Profesor">Profesor</option>
-												<option value="Representante">Representante</option>
-										</select></td>
-
-										<td>
-											<button type="button" id="btnBuscarPersona">Buscar</button>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+						<div class="grid-container1">
+							<div class="grid-item" id="gridItemLblCedula">
+								<label>Cédula</label>
+							</div>
+							<div class="grid-item">
+								<label>Tipo de usuario</label>
+							</div>
+							<div class="grid-item"></div>
+							<div class="grid-item">
+								<select id="tipodocumento" name="tipodocumento">
+									<option value="" selected></option>
+									<option value="V">V</option>
+									<option value="E">E</option>
+									<option value="P">P</option>
+								</select> <input type="text" id="numerocedula" name="numerocedula" />
+								<input type="hidden" id="cedula" th:field="*{cedula}" />
+							</div>
+							<div class="grid-item">
+								<select id="tipousuario" name="tipousuario">
+									<option value="" selected></option>
+									<option value="Alumno">Alumno</option>
+									<option value="Profesor">Profesor</option>
+									<option value="Representante">Representante</option>
+								</select>
+							</div>
+							<div class="grid-item">
+								<button type="button" id="btnBuscarPersona">Buscar</button>
+							</div>
 						</div>
 						<br />
-						<div class="container" id="containerusuario">
-							<div class="row">
-								<div class="col-md-12">
-									<label for="nombreapellido" class="col-form-label">Nombre
-										y Apellido:</label>
-								</div>
-								<div class="col-md-12">
-									<input type="text" id="nombreapellido" />
-								</div>
+						<div class="grid-container2" id="containerusuario">
+							<div class="grid-item">
+								<label for="nombreapellido" class="col-form-label">Nombre
+									y Apellido</label>
 							</div>
-
+							<div class="grid-item">
+								<input type="text" id="nombreapellido" readonly="readonly" th:field="*{nombre}"/>
+							</div>
 							<br />
-
-							<div class="row">
-								<div class="col-md-12">
-									<label for="usuario" class="col-form-label">Usuario:</label>
-								</div>
-								<div class="col-md-12">
-									<input type="text" id="usuario" />
-								</div>
+							<div class="grid-item">
+								<label for="usuario" class="col-form-label">Usuario</label>
 							</div>
-
+							<div class="grid-item">
+								<input type="text" id="usuario" readonly="readonly" th:field="*{username}"/>
+							</div>
 							<br />
-
-							<div class="row">
-								<div class="col-md-12">
-									<label for="clave" class="col-form-label">Clave:</label>
-								</div>
-								<div class="col-md-12">
-									<input type="text" id="clave" />
-								</div>
+							<div class="grid-item">
+								<label for="clave" class="col-form-label">Clave (Por favor ingrese una clave entre 8 y 15 caracteres)</label>
 							</div>
-
+							<div class="grid-item">
+								<input type="text" id="clave" th:field="*{password}"/>
+							</div>
 							<br />
-
-							<div class="row">
-								<div class="col-md-12">
-									<label for="confirmarclave" class="col-form-label">Confirmar
-										Clave:</label>
-								</div>
-								<div class="col-md-12">
-									<input type="text" id="confirmarclave" />
-								</div>
+							<div class="grid-item">
+								<label for="confirmarclave" class="col-form-label">Confirmar clave
+									Clave</label>
 							</div>
-
-							<div class="row">
-								<button type="button" class="btn btn-primary">
-									Registrar Usuario</button>
+							<div class="grid-item">
+								<input type="text" id="confirmarclave" />
+							</div>
+						</div>
+						<br /> <br />
+						<div class="grid-container3" id="containerbotones">
+							<div class="grid-item">
+								<button type="button" class="btn btn-primary"
+									id="registrarusuario">Registrar Usuario</button>
 							</div>
 						</div>
 					</form>
@@ -121,15 +128,16 @@
 			</div>
 		</div>
 	</div>
+
 	<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		<script
-			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script
-			src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-		<script src="/js/registroUsuario.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+	<script src="/js/registroUsuario.js"></script>
 </body>
 </html>
