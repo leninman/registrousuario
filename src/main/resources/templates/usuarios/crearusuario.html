@@ -1,135 +1,269 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
-<link rel="stylesheet" type="text/css"
-	href="/css/estilosRegistroUsuario.css" />
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+        <link rel="stylesheet" type="text/css"
+              href="/css/estilosRegistroUsuario.css" />
+        <link rel="stylesheet" type="text/css"
+              href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+        <link rel="stylesheet" type="text/css"
+              href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="shortcut icon" href="#">
+    </head>
 
-<header></header>
+    <header></header>
 
-<body>
-	<div class="container p-3 my-3">
-		<div class="card mx-auto" id="regForm">
-			<div class="card-header">Registro de Usuario</div>
+    <body>
+        <div class="container p-3 my-3">
+            <div class="card mx-auto" id="regForm">
+                <div class="card-header">
+                    <div class="grid-container0">
+                        <div class="grid-item">
+                            <h5 id="exampleModalLabel">Registro de usuario</h5>
+                            <input type="hidden" id="direccionbase" name="direccionbase" th:value="${direccionbase}" /> 
+                            <input type="hidden" id="direccionregistrousuario" name="direccionregistrousuario"
+                                   th:value="${direccionregistrousuario}" />
+                        </div>
 
-			<div class="card-body">
-				<div class="container">
-					<form>
-						<input type="hidden" id="direccionbase" name="direccionbase"
-							th:value="${direccionbase}" /> 
-						<input type="hidden"
-							id="direccionregistrousuario" name="direccionregistrousuario"
-							th:value="${direccionregistrousuario}" />
-						<div class="row" id="rowtablenuevousuario">
-							<table id="tablenuevousuario">
-								<thead>
-									<tr>
-										<th>Cédula</th>
-										<th>Tipo de usuario</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><select id="tipodocumento" name="tipodocumento">
-												<option value="" selected></option>
-												<option value="V">V</option>
-												<option value="E">E</option>
-												<option value="P">P</option>
-										</select> <input type="text" id="numerocedula" name="numerocedula" />
-										</td>
+                        <div class="grid-item">
+                            <a type="button" data-toggle="tooltip"
+                               title="Salir" class="btn btn-danger" id="btnSalir" 
+                               th:href="@{${direccionbase}+'/login'}">
+                                <i class="bi bi-x"></i><span class="sr-only">(current)</span></a>
 
-										<td><select id="tipousuario" name="tipousuario">
-												<option value="" selected></option>
-												<option value="Alumno">Alumno</option>
-												<option value="Profesor">Profesor</option>
-												<option value="Representante">Representante</option>
-										</select></td>
+                            <!-- <button type="button" class="close" aria-label="Close" onclick="closeForm()">
+                                    <span aria-hidden="true">&times;</span>
+                            </button>-->
+                        </div>
 
-										<td>
-											<button type="button" id="btnBuscarPersona">Buscar</button>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<br />
-						<div class="container" id="containerusuario">
-							<div class="row">
-								<div class="col-md-12">
-									<label for="nombreapellido" class="col-form-label">Nombre
-										y Apellido:</label>
-								</div>
-								<div class="col-md-12">
-									<input type="text" id="nombreapellido" />
-								</div>
-							</div>
 
-							<br />
 
-							<div class="row">
-								<div class="col-md-12">
-									<label for="usuario" class="col-form-label">Usuario:</label>
-								</div>
-								<div class="col-md-12">
-									<input type="text" id="usuario" />
-								</div>
-							</div>
 
-							<br />
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <!--<form th:action="@{/app/guardarusuario}" th:object="${usuario}" method="post" 
+                              id="formRegistroUsuario" name="formRegistroUsuario">-->
+                        <form action="#" method="post" id="formRegistroUsuario" th:object="${usuariodto}" name="formRegistroUsuario">
+                            <input type="hidden" id="direccionbase" name="direccionbase"
+                                   th:value="${direccionbase}" /> <input type="hidden"
+                                   id="direccionregistrousuario" name="direccionregistrousuario"
+                                   th:value="${direccionregistrousuario}" />
+                            <div class="grid-container1">
+                                <div class="grid-item" id="gridItemLblCedula">
+                                    <label>Cédula</label>
+                                </div>
+                                <div class="grid-item">
+                                    <label>Tipo de usuario</label>
+                                </div>
+                                <div class="grid-item"></div>
+                                <div class="grid-item">
+                                    <select id="tipodoc" th:field="*{tipodoc}">
+                                        <option value="" selected></option>
+                                        <option value="V">V</option>
+                                        <option value="E">E</option>
+                                        <option value="P">P</option>
+                                    </select> <input type="text" id="nrodoc" th:field="*{nrodoc}" />
+                                    <!--<input type="hidden" id="cedula" th:field="*{cedula}" />-->
+                                </div>
+                                <div class="grid-item">
+                                    <select id="tipousuario" th:field="*{tipousuario}">
+                                        <option value="" selected></option>
+                                        <option value="Administrativo">Administrativo</option>
+                                        <option value="Alumno">Alumno</option>
+                                        <option value="Directivo">Directivo</option>
+                                        <option value="Profesor">Profesor</option>
+                                        <option value="Representante">Representante</option>
+                                    </select>
+                                </div>
+                                <div class="grid-item">
+                                    <button type="button" id="btnBuscarPersona">Buscar</button>
+                                </div>
 
-							<div class="row">
-								<div class="col-md-12">
-									<label for="clave" class="col-form-label">Clave:</label>
-								</div>
-								<div class="col-md-12">
-									<input type="text" id="clave" />
-								</div>
-							</div>
 
-							<br />
+                            </div>
 
-							<div class="row">
-								<div class="col-md-12">
-									<label for="confirmarclave" class="col-form-label">Confirmar
-										Clave:</label>
-								</div>
-								<div class="col-md-12">
-									<input type="text" id="confirmarclave" />
-								</div>
-							</div>
+                            <div class="grid-container2">
+                                <div class="grid-item">
+                                    <label for="" id="lbltipocedula">Requerido</label>
+                                </div>
 
-							<div class="row">
-								<button type="button" class="btn btn-primary">
-									Registrar Usuario</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		<script
-			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script
-			src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-		<script src="/js/registroUsuario.js"></script>
-</body>
+                                <div class="grid-item">
+                                    <label for="" id="lblnumerocedula">Requerido</label>
+                                </div>
+                                <div class="grid-item">
+                                    <label for=""></label>
+                                </div>
+
+
+                                <div class="grid-item">
+                                    <label for="" id="lbltipousuario">Requerido</label>
+                                </div>
+                                <div class="grid-item">
+                                    <label for=""></label>
+                                </div>
+                                <div class="grid-item">
+                                    <label for=""></label>
+                                </div>
+
+
+                            </div>
+                            <br />
+                            <div class="grid-container3" id="containerusuario">
+                                <div class="grid-item">
+                                    <label for="nombreapellido" class="col-form-label">Nombres
+                                        y Apellidos</label>
+                                </div>
+                                <div class="grid-item">
+                                    <input type="text" id="nombre" readonly="readonly" th:field="*{nombre}"/>
+                                </div>
+                                <br />
+                                <div class="grid-item">
+                                    <label for="correo" class="col-form-label">Correo electrónico</label>
+                                </div>
+
+                                <div class="grid-item">
+                                    <input type="text" id="correo" readonly="readonly" th:field="*{correo}"/>
+                                </div>
+                                <br />
+
+                                <div class="grid-item">
+                                    <label for="usuario" class="col-form-label">Usuario</label>
+                                </div>
+                                <div class="grid-item">
+                                    <input type="text" id="username" readonly="readonly" th:field="*{username}"/>
+                                </div>
+                                <br />
+                                <div class="grid-item">
+                                    <label for="claveprimercampo" class="col-form-label">Clave (Por favor ingrese una clave entre 8 y 15 caracteres)</label>
+                                </div>
+                                <div class="grid-item">
+                                    <input type="password" id="claveprimercampo" th:field="*{claveprimercampo}"/>
+                                </div>
+                                <div class="grid-item">
+                                    <label for="" id="lblvalidaclaveprimercampo">Requerido</label>
+                                </div>
+                                <br />
+
+                                <div class="grid-item">
+                                    <label for="clavesegundocampo" class="col-form-label">Confirmar clave
+                                     </label>
+                                </div>
+                                <div class="grid-item">
+                                    <input type="password" id="clavesegundocampo" th:field="*{clavesegundocampo}"  />
+                                </div>
+                                <div class="grid-item">
+                                    <label for="" id="lblvalidaclavesegundocampo">Requerido</label>
+                                </div>
+                            </div>
+                            <br /> <br />
+                            <div class="grid-container4" id="containerbotones">
+                                <div class="grid-item">
+                                    <label for=""></label>
+                                </div>
+                                <div class="grid-item">
+                                    <div id="containerbotonsubmit">
+                                        <button type="button" class="btn btn-primary" id="submit">Registrar Usuario</button>
+                                    </div>
+                                </div>
+                                <div class="grid-item">
+                                    <label for=""></label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="modalusuarioregistrado">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Registro exitoso</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p id="parrafomodalusreg"></p>
+                    </div>
+                    <div class="modal-footer" id="containerbotonmodal">
+                        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                        <button type="button" class="btn btn-primary" id="btnUsuarioRegistrado">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal" tabindex="-1" role="dialog" id="modalusuarioyaexiste">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Información</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p id="parrafomodalusyaexiste"></p>
+                    </div>
+                    <div class="modal-footer" id="containerbotonmodal">
+                        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                        <button type="button" class="btn btn-primary" id="btnUsuarioyaexiste">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="modalpersonanoencontrada">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Información</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p id="parrafomodalpersonanoencontrada"></p>
+                    </div>
+                    <div class="modal-footer" id="containerbotonmodal">
+                        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                        <button type="button" class="btn btn-primary" id="btnPersonanoencontrada" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="modalclaves">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Información</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p id="parrafomodalclaves"></p>
+                    </div>
+                    <div class="modal-footer" id="containerbotonmodal">
+                        <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                        <button type="button" class="btn btn-primary" id="btnClaves" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script
+        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        <script src="/js/registroUsuario.js"></script>
+    </body>
 </html>

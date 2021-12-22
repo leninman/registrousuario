@@ -21,6 +21,7 @@ public class PersonaDTO implements Serializable {
 	
 	private String segundoApellido;
 	
+	private String correo;
 
 	public String getTipoDocumento() {
 		return tipoDocumento;
@@ -69,6 +70,20 @@ public class PersonaDTO implements Serializable {
 	public void setSegundoApellido(String segundoApellido) {
 		this.segundoApellido = segundoApellido;
 	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 
 	
 	

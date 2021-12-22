@@ -8,94 +8,152 @@ import com.virtualeduc.registrousuario.models.Profesor;
 import com.virtualeduc.registrousuario.models.Representante;
 import com.virtualeduc.registrousuario.models.Usuario;
 import com.virtualeduc.registrousuario.models.DTOS.PersonaDTO;
+import com.virtualeduc.registrousuario.models.Role;
 import com.virtualeduc.registrousuario.repo.IAlumnoRepo;
 import com.virtualeduc.registrousuario.repo.IProfesorRepo;
 import com.virtualeduc.registrousuario.repo.IRepresentanteRepo;
+import com.virtualeduc.registrousuario.repo.IRoleRepo;
+import com.virtualeduc.registrousuario.repo.IUsuarioRepo;
 
 @Service
 public class IUsuarioServiceImpl implements IUsuarioService {
 
-	@Autowired
-	IAlumnoRepo alumnoRepo;
+    @Autowired
+    IAlumnoRepo alumnoRepo;
 
-	@Autowired
-	IProfesorRepo profesorRepo;
+    @Autowired
+    IProfesorRepo profesorRepo;
 
-	@Autowired
-	IRepresentanteRepo representanteRepo;
+    @Autowired
+    IRepresentanteRepo representanteRepo;
 
-	@Override
-	public Usuario findUsuarioByCedulaAndTipoUsuario(String tipodoc, String numdoc, String tipousuario) {
-		// TODO Auto-generated method stub
+    @Autowired
+    IUsuarioRepo usuarioRepo;
+    
+     @Autowired
+    IRoleRepo roleRepo;
 
-		return null;
-	}
+    @Override
+    public Usuario findUsuarioByCedulaAndTipoUsuario(String tipodoc, String numdoc, String tipousuario) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public PersonaDTO findPersonaByCedulaAndTipoUsuario(String tipodoc, String numdoc, String tipoUsuario) {
-		// TODO Auto-generated method stub
-		PersonaDTO persona = new PersonaDTO();
+        return null;
+    }
 
-		try {
+    @Override
+    public PersonaDTO findPersonaByCedulaAndTipoUsuario(String tipodoc, String numdoc, String tipoUsuario) {
+        // TODO Auto-generated method stub
+        PersonaDTO persona = new PersonaDTO();
 
-			switch (tipoUsuario) {
+        try {
 
-			case "Alumno":
+            switch (tipoUsuario) {
 
-				Alumno alumno = alumnoRepo.findAlumnoByTipoDocAlAndNumDocAl(tipodoc, numdoc);
+                case "Alumno":
 
-				if (alumno != null) {
-					persona.setTipoDocumento(alumno.getTipoDocAl());
-					persona.setNumeroDocumento(alumno.getNumDocAl());
-					persona.setPrimerNombre(alumno.getPrimNombAl());
-					persona.setSegundoNombre(alumno.getSegNombAl());
-					persona.setPrimerApellido(alumno.getPrimApellAl());
-					persona.setSegundoApellido(alumno.getSegApellAl());
-					
-				}
+                    Alumno alumno = alumnoRepo.findAlumnoByTipoDocAlAndNumDocAl(tipodoc, numdoc);
 
-				break;
+                    if (alumno != null) {
+                        persona.setTipoDocumento(alumno.getTipoDocAl());
+                        persona.setNumeroDocumento(alumno.getNumDocAl());
+                        persona.setPrimerNombre(alumno.getPrimNombAl());
+                        persona.setSegundoNombre(alumno.getSegNombAl());
+                        persona.setPrimerApellido(alumno.getPrimApellAl());
+                        persona.setSegundoApellido(alumno.getSegApellAl());
+                        persona.setCorreo(alumno.getEmailAl());
 
-			case "Profesor":
+                    }
 
-				Profesor profesor = profesorRepo.consultarProfesorPorCedula(tipodoc, numdoc);
+                    break;
 
-				if (profesor != null) {
-					persona.setTipoDocumento(profesor.getTipoDocPrf());
-					persona.setNumeroDocumento(profesor.getNumDocPrf());
-					persona.setPrimerNombre(profesor.getPrimNombPrf());
-					persona.setSegundoNombre(profesor.getSegNombPrf());
-					persona.setPrimerApellido(profesor.getPrimApellPrf());
-					persona.setSegundoApellido(profesor.getSegApellPrf());
-					
-				}
+                case "Profesor":
 
-				break;
+                    Profesor profesor = profesorRepo.consultarProfesorPorCedula(tipodoc, numdoc);
 
-			case "Representante":
-				
-				Representante representante=representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(tipodoc,numdoc);
-				
-				if (representante != null) {
-					persona.setTipoDocumento(representante.getTipoDocRpr());
-					persona.setNumeroDocumento(representante.getNumDocRpr());
-					persona.setPrimerNombre(representante.getPrimNombRpr());
-					persona.setSegundoNombre(representante.getSegNombRpr());
-					persona.setPrimerApellido(representante.getPrimApellRpr());
-					persona.setSegundoApellido(representante.getSegApellRpr());
-					
-				}
+                    if (profesor != null) {
+                        persona.setTipoDocumento(profesor.getTipoDocPrf());
+                        persona.setNumeroDocumento(profesor.getNumDocPrf());
+                        persona.setPrimerNombre(profesor.getPrimNombPrf());
+                        persona.setSegundoNombre(profesor.getSegNombPrf());
+                        persona.setPrimerApellido(profesor.getPrimApellPrf());
+                        persona.setSegundoApellido(profesor.getSegApellPrf());
+                        persona.setCorreo(profesor.getEmailPrf());
 
+                    }
 
-				break;
+                    break;
 
-			}
+                case "Representante":
 
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+                    Representante representante = representanteRepo.findRepresentanteByTipoDocRprAndNumDocRpr(tipodoc, numdoc);
 
-		return persona;
-	}
+                    if (representante != null) {
+                        persona.setTipoDocumento(representante.getTipoDocRpr());
+                        persona.setNumeroDocumento(representante.getNumDocRpr());
+                        persona.setPrimerNombre(representante.getPrimNombRpr());
+                        persona.setSegundoNombre(representante.getSegNombRpr());
+                        persona.setPrimerApellido(representante.getPrimApellRpr());
+                        persona.setSegundoApellido(representante.getSegApellRpr());
+                        persona.setCorreo(representante.getEmailRpr());
+
+                    }
+
+                    break;
+
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return persona;
+    }
+
+    @Override
+    public boolean consultarNombreUsuario(String nombredeusuario) {
+        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        Usuario usuario = usuarioRepo.findByUsername(nombredeusuario);
+
+        if (usuario != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    @Override
+    public boolean findUsuarioBytipodocAndnrodoc(String tipodoc, String nrodoc) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        Usuario usuario = usuarioRepo.findBytipoDocAndnroDoc(tipodoc, nrodoc);
+
+        if (usuario != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    @Override
+    public Usuario guardarUsuario(Usuario usuario) {
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return usuarioRepo.save(usuario);
+    }
+
+//    @Override
+//    public Role guardarUsuario(Role role) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    
+//        return roleRepo.save(role);
+//    }
+
+    @Override
+    public Role guardarRole(Role role) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return roleRepo.save(role);
+    }
 
 }
