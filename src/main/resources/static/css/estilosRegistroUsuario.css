@@ -13,7 +13,7 @@ body {
 }
 
 
-#registrarusuario {
+#submit,#btnUsuarioRegistrado,#btnClavesdiferentes,#btnUsuarioyaexiste {
 	border-radius: 100px;
 	border: 1px solid #b5b5b5;
 	background-color: #2441e6;
@@ -30,18 +30,18 @@ body {
 	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-#nombreapellido{
+#nombre{
 	text-transform:uppercase;
 }
 
-#tipodocumento {
+#tipodoc {
 	border-radius: 100px;
 	border: 1px solid #b5b5b5;
 	width: 50px;
 	text-align: center;
 }
 
-#numerocedula {
+#nrodoc {
 	border-radius: 100px;
 	border: 1px solid #b5b5b5;
 	width: 100px;
@@ -54,8 +54,13 @@ body {
 	width: 150px;
 	text-align: center;
 }
+#lbltipocedula,#lblnumerocedula,#lbltipousuario,#lblvalidaclaveprimercampo,#lblvalidaclavesegundocampo{
+    display:none;
+    font-size: small;
+    color:red;
+}
 
-#nombreapellido, #usuario, #clave, #confirmarclave {
+#nombre, #username, #claveprimercampo, #clavesegundocampo,#correo {
 	border-radius: 100px;
 	border: 1px solid #b5b5b5;
 	width: 415px;
@@ -100,16 +105,25 @@ body {
 	display: grid;
 	grid-template-columns: auto auto auto;	
 }
-
 .grid-container2 {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto;	
+}
+.grid-container3 {
 	display: grid;
 	grid-template-columns: auto;	
 }
 
-.grid-container3 {
+.grid-container4 {
 	display: grid;
 	grid-template-columns: auto auto auto;	
 }
+
+#containerbotonmodal,#containerbotonsubmit{
+    display: flex;
+    justify-content: center;
+}
+
 
 
 

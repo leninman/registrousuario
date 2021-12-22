@@ -90,7 +90,7 @@ public class Securityconfig extends WebSecurityConfigurerAdapter {
 		
 		http
 		.authorizeRequests().antMatchers("/","/css/**",
-		"/js/**","/images/**","/app/nuevousuario","/app/consultarpersona","/app/guardarusuario").permitAll()
+		"/js/**","/images/**","/app/nuevousuario","/app/consultarpersona","/app/guardarusuario","/app/consultarusuarioporcedula","/app/consultarnombredeusuario").permitAll()
 		/*.antMatchers("/app/listaralumnos").hasAnyRole("USER")
 		.antMatchers("/app/registroalumno").hasAnyRole("ADMIN")
 		.antMatchers("/app/verAlumno/**").hasAnyRole("USER")

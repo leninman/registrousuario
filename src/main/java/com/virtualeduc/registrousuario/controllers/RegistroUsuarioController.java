@@ -22,74 +22,141 @@ import com.virtualeduc.registrousuario.models.Usuario;
 import com.virtualeduc.registrousuario.models.DTOS.PersonaDTO;
 import com.virtualeduc.registrousuario.services.IUsuarioService;
 import com.virtualeduc.registrousuario.models.DTOS.AlumnoDTO;
+import com.virtualeduc.registrousuario.models.DTOS.UsuarioDTO;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 @RequestMapping("/app")
 public class RegistroUsuarioController {
 
-	@Autowired
-	IUsuarioService usuarioservice;
-	
-	@Autowired
-	private BCryptPasswordEncoder passWordEncoder;
+    @Autowired
+    IUsuarioService usuarioservice;
 
-	@Value("${dir.base}")
-	String direccionbase;
+    @Autowired
+    private BCryptPasswordEncoder passWordEncoder;
 
-	@Value("${dir.registro.usuario}")
-	String direccionregistrousuario;
+    @Value("${dir.base}")
+    String direccionbase;
 
-	@CrossOrigin(origins = { "direccionbase/consultarpersona" })
-	@GetMapping(path = "/consultarpersona")
-	public PersonaDTO consultarpersona(@RequestParam(name = "tipodoc") String tipodoc,
-			@RequestParam(name = "numdoc") String numdoc, @RequestParam(name = "tipousuario") String tipousuario) {
+    @Value("${dir.registro.usuario}")
+    String direccionregistrousuario;
 
-		PersonaDTO persona = new PersonaDTO();
+    @CrossOrigin(origins = {"direccionbase/consultarpersona"})
+    @GetMapping(path = "/consultarpersona")
+    public PersonaDTO consultarpersona(@RequestParam(name = "tipodoc") String tipodoc,
+            @RequestParam(name = "nrodoc") String nrodoc, @RequestParam(name = "tipousuario") String tipousuario) {
 
-		persona = usuarioservice.findPersonaByCedulaAndTipoUsuario(tipodoc, numdoc, tipousuario);
+        PersonaDTO persona = new PersonaDTO();
 
-		return persona;
-	}
-	
-	@CrossOrigin(origins = { "direccionbase/guardarusuario" })
-	@PostMapping(path = "/guardarusuario")
-	public Usuario guardarusuario(Usuario usuario, @RequestParam(name="tipousuario") String tipousuario,Model model) {
-		
-		Usuario user=new Usuario(); 
-		
-		List<Role> roles=new ArrayList<>();
-		
-		user.setUsername(usuario.getUsername());
-		
-		String clave=usuario.getPassword();
-		
-		String bcryptedPassword=passWordEncoder.encode(clave);
-		
-		user.setPassword(bcryptedPassword);
-		
-		user.setClave1(bcryptedPassword);
-		
-		user.setCorreo(usuario.getCorreo());
-		
-		user.setFechaHoraActClave(new Date());
-		
-		user.setFechaHoraUltIngreso(new Date());
-		
-		user.setNombre(usuario.getNombre());
-		
-		user.setCedula(usuario.getCedula());
-		
-		
-		user.setEnabled(true);
-		
-		
-		
-		return user;
-		
-	}
+        persona = usuarioservice.findPersonaByCedulaAndTipoUsuario(tipodoc, nrodoc, tipousuario);
+
+        return persona;
+    }
+
+    @CrossOrigin(origins = {"direccionbase/guardarusuario"})
+    @PostMapping(path = "/guardarusuario")
+    public Usuario guardarusuario(UsuarioDTO usuariodto, Model model) {
+
+        Usuario usuario = new Usuario();
+
+        String tipouser = usuariodto.getTipousuario();
+
+        //List<Role> roles = new ArrayList<>();
+
+        usuario.setUsername(usuariodto.getUsername());
+
+        String clave = usuariodto.getClaveprimercampo();
+
+        String bcryptedPassword = passWordEncoder.encode(clave);
+
+        usuario.setClave1(bcryptedPassword);
+        
+        usuario.setPassword(bcryptedPassword);
+
+        usuario.setCorreo(usuariodto.getCorreo());
+
+        usuario.setFechaHoraActClave(new Date());
+
+        usuario.setFechaHoraUltIngreso(new Date());
+
+        usuario.setNombre(usuariodto.getNombre());
+
+        usuario.setTipodoc(usuariodto.getTipodoc());
+        
+        usuario.setNrodoc(usuariodto.getNrodoc());
+
+        usuario.setTipousuario(usuariodto.getTipousuario());
+
+        Role role = new Role();
+
+  /* SE LE DARA SOLO UN ROL A CADA USUARIO Y EN ESE ROL TENDRA TODOS LOS PERMISOS 
+        NECESARIOS EN LA APLICACION */
+  
+        switch (tipouser) {
+            case "Alumno":
+                role.setAuthority("ROLE_USER_ALUMNO");
+//                roles.add(role);
+                break;
+
+            case "Profesor":
+                role.setAuthority("ROLE_USER_PROFESOR");
+//                roles.add(role);
+
+                break;
+
+            case "Representante":
+                role.setAuthority("ROLE_USER_REPRESENTANTE");
+//                roles.add(role);
+
+                break;
+
+            case "Administrativo":
+                role.setAuthority("ROLE_USER_ADMINISTRATIVO");
+//                roles.add(role);
+
+                break;
+
+            case "Directivo":
+                role.setAuthority("ROLE_USER_DIRECTIVO");
+//                roles.add(role);
+                break;
+        }
+        
+        //usuario.setRoles(roles);
+
+        usuario.setEnabled(true);
+        
+        Usuario nuevousuario=usuarioservice.guardarUsuario(usuario);
+        
+        role.setUserid(nuevousuario.getId());
+        
+        Role rolenuevousuario=usuarioservice.guardarRole(role);
+       
+        usuario=nuevousuario;
+
+        return usuario;
+
+    }
+
+    @CrossOrigin(origins = {"direccionbase/consultarusuarioporcedula"})
+    @GetMapping(path = "/consultarusuarioporcedula")
+    public boolean consultarusuarioporcedula(@RequestParam(name = "tipodoc") String tipodoc,@RequestParam(name = "nrodoc") String nrodoc) {
+
+        return usuarioservice.findUsuarioBytipodocAndnrodoc(tipodoc,nrodoc);
+
+    }
+
+    @CrossOrigin(origins = {"direccionbase/consultarnombredeusuario"})
+    @GetMapping(path = "/consultarnombredeusuario")
+    public boolean consultarnombredeusuario(@RequestParam(name = "usuario") String usuario) {
+
+        return usuarioservice.consultarNombreUsuario(usuario);
+
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.virtualeduc.registrousuario.controllers;
 
+import com.virtualeduc.registrousuario.models.DTOS.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +23,11 @@ public class UsuarioController {
 	@GetMapping("/nuevousuario")
 	public String nuevousuario(Model model) {
 		
-		Usuario usuario=new Usuario();
+		UsuarioDTO usuariodto=new UsuarioDTO();
 		
 		model.addAttribute("direccionbase",direccionbase);
 		model.addAttribute("direccionregistrousuario",direccionregistrousuario);
-		model.addAttribute("usuario",usuario);
+		model.addAttribute("usuariodto",usuariodto);
 		return "usuarios/crearusuario";
 		
 	}
