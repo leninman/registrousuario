@@ -110,34 +110,30 @@ public class IUsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public Usuario consultarNombreUsuario(String username) {
+    public boolean consultarNombreUsuario(String nombredeusuario) {
         // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
-        Usuario usuario = usuarioRepo.findByUsername(username);
-        
-       return usuario;
+        Usuario usuario = usuarioRepo.findByUsername(nombredeusuario);
 
-//        if (usuario != null) {
-//            return true;
-//        } else {
-//            return false;
-//        }
+        if (usuario != null) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
     @Override
-    public Usuario findUsuarioBytipodocAndnrodoc(String tipodoc, String nrodoc) {
+    public boolean findUsuarioBytipodocAndnrodoc(String tipodoc, String nrodoc) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
         Usuario usuario = usuarioRepo.findBytipoDocAndnroDoc(tipodoc, nrodoc);
-        
-        return usuario;
 
-//        if (usuario != null) {
-//            return true;
-//        } else {
-//            return false;
-//        }
+        if (usuario != null) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 

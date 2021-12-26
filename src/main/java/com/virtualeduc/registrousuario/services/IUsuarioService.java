@@ -10,9 +10,9 @@ public interface IUsuarioService {
 	
 	public PersonaDTO findPersonaByCedulaAndTipoUsuario(String tipodoc,String numdoc,String tipoUsuario);
 	
-        public Usuario findUsuarioBytipodocAndnrodoc(String tipodoc,String nrodoc);
+        public boolean findUsuarioBytipodocAndnrodoc(String tipodoc,String nrodoc);
         
-        public Usuario consultarNombreUsuario(String username);
+        public boolean consultarNombreUsuario(String nombredeusuario);
         
         public Usuario guardarUsuario(Usuario usuario);
         
