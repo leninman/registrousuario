@@ -10,11 +10,11 @@
     </parent>
     <groupId>com.virtualeduc</groupId>
     <artifactId>registrousuario</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>V1.0</version>
     <name>registrousuario</name>
     <description>Registro de usuario</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
     </properties>
     <dependencies>
         <dependency>
