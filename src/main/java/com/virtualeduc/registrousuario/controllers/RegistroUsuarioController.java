@@ -145,17 +145,27 @@ public class RegistroUsuarioController {
 
     @CrossOrigin(origins = {"direccionbase/consultarusuarioporcedula"})
     @GetMapping(path = "/consultarusuarioporcedula")
-    public boolean consultarusuarioporcedula(@RequestParam(name = "tipodoc") String tipodoc,@RequestParam(name = "nrodoc") String nrodoc) {
+    public Usuario consultarusuarioporcedula(@RequestParam(name = "tipodoc") String tipodoc,@RequestParam(name = "nrodoc") String nrodoc) {
 
-        return usuarioservice.findUsuarioBytipodocAndnrodoc(tipodoc,nrodoc);
+        Usuario usuariodevuelto=new Usuario();
+        
+        usuariodevuelto=usuarioservice.findUsuarioBytipodocAndnrodoc(tipodoc,nrodoc);
+        
+        //return usuarioservice.findUsuarioBytipodocAndnrodoc(tipodoc,nrodoc);
+        
+        return usuariodevuelto;
 
     }
 
     @CrossOrigin(origins = {"direccionbase/consultarnombredeusuario"})
     @GetMapping(path = "/consultarnombredeusuario")
-    public boolean consultarnombredeusuario(@RequestParam(name = "usuario") String usuario) {
+    public Usuario consultarnombredeusuario(@RequestParam(name = "username") String username) {
 
-        return usuarioservice.consultarNombreUsuario(usuario);
+        Usuario usuariodevuelto=new Usuario();
+        
+        usuariodevuelto=usuarioservice.consultarNombreUsuario(username);
+        
+        return usuariodevuelto;
 
     }
 
