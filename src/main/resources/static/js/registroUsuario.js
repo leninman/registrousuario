@@ -8,7 +8,7 @@ var primernombre;
 var segundonombre;
 var primerapellido;
 var segundoapellido;
-var usuario;
+//var usuario;
 var formUsuario;
 var cedula;
 var claveprimercampo;
@@ -173,7 +173,7 @@ $("#btnBuscarPersona").click(function () {
                         if (response !== null) {
                             $('#modalusuarioyaexiste').modal({backdrop: 'static', keyboard: false});
                             $("#modalusuarioyaexiste").modal('show');
-                            $("#parrafomodalusyaexiste").html("El usuario con el numero de cédula que se intenta registrar ya existe");
+                            $("#parrafomodalusyaexiste").html("El usuario con el numero de cédula que se intenta registrar ya es usuario en el sistema");
 //                            window.location.href = "/app/nuevousuario";
                             usuarioexiste = true;
                             return;
@@ -197,7 +197,7 @@ $("#btnBuscarPersona").click(function () {
                             `${primerapellido}` + ' ' + `${segundoapellido}`);
                     $("#correo").val(`${correo}`);
                     formarUsuario();  //DEVUELVE EL NOMBRE DEL USUARIO EN LA VARIABLE usuario
-                    $("#username").val(`${usuario}`);
+                   // $("#username").val(`${usuario}`);
                     $("#containerusuario").css('display', 'block');
                     //$("#cedula").val(response["tipoDocumento"] + response["numeroDocumento"]);
                 }
@@ -207,7 +207,8 @@ $("#btnBuscarPersona").click(function () {
                 //alert("La persona no se encuentra registrada o el tipo de usuario seleccionado no es correcto");
                 $('#modalpersonanoencontrada').modal({backdrop: 'static', keyboard: false});
                 $("#modalpersonanoencontrada").modal('show');
-                $("#parrafomodalpersonanoencontrada").html("La persona o usuario que esta intentando registar no se encuentra en el sistema o el tipo de usuario seleccionado no es correcto");
+                $("#parrafomodalpersonanoencontrada").html("La persona o usuario que esta intentando registar no posee ninguna relación con la institución \n\
+o el tipo de usuario seleccionado o el numero de cédula no es correcto");
 
             }
 
@@ -251,7 +252,7 @@ function formarUsuario() {
 
     var user = `${primerCaracterNombre}` + `${primerapellido}`;
 
-    usuario = `${user}`.toLowerCase();
+    var usuario = `${user}`.toLowerCase();
     
     url = direccionregistrousuario + "/consultarnombredeusuario";
     
@@ -268,15 +269,22 @@ function formarUsuario() {
         success: function (response) {
             if(response["username"]!==null){
                  usuario=usuario+"1";
+                 $("#username").val(`${usuario}`);
+                 //return usuario;
             }
             
             
             
            
         }
+        //return usuario;
+    })
+     .fail(function (response) {
+     // alert("El representante no se encuentra registrado");
+         $("#username").val(`${usuario}`);
     });
     
-    return usuario;
+   //return usuario;
 
 //    while (consultarNombreUsuarioExiste()) {
 //        i++;
