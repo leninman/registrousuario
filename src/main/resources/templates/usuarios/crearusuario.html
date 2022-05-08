@@ -72,7 +72,8 @@
                                         <option value="V">V</option>
                                         <option value="E">E</option>
                                         <option value="P">P</option>
-                                    </select> <input type="text" id="nrodoc" th:field="*{nrodoc}" />
+                                    </select> <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+									maxlength="8" id="nrodoc" th:field="*{nrodoc}" />
                                     <!--<input type="hidden" id="cedula" th:field="*{cedula}" />-->
                                 </div>
                                 <div class="grid-item">
